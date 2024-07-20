@@ -51,16 +51,17 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
     
 
 
-    def DFS(self, start):
+    def DFS(self, start: User):
 
         visited = set()
-        i = self.vertices[start]
+        i = self.vertices[start.name]
+
+        print("Depth-first Search starting from " + start.name + ":")
 
         def recursive_call(i, visited):
             for k, v in self.vertices.items():
                 if v == i:
-                    print(k)
-                    print('|')
+                    print(k, end= ' ')
 
             visited.add(i)
 
@@ -69,30 +70,28 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
                     recursive_call(r, visited)
 
         recursive_call(i, visited)
-        print("Null")
     
 
-    def BFS(self, start):
-        j = self.vertices[start]
+    def BFS(self, start: User):
+        j = self.vertices[start.name]
         queue = deque()
         queue.append(j)
 
         visited = set()
         visited.add(j)
+        print("Breadth-first Search starting from " + start.name + ":")
         while queue:
 
             item = queue.popleft()
             for k, v in self.vertices.items():
                 if v == item:
-                    print(k)
-                    print("|")
+                    print(k, end=' ')
 
             for i in range(len(self.graph[item])):
                 if self.graph[item][i] > 0 and i not in visited:
                     queue.append(i)
         
         
-        print("Null")
 
     
     def add_posts(self, user: User):
@@ -146,15 +145,19 @@ G = DiGraph()
 user1 = User("Alice", 17, "NY")
 user2 = User("Bob", 18, "Lebanon")
 user3 = User("Mohamad", 19, "Lebanon")
+user4 = User("ali", 19, "Ny")
 G.add_user(user1)
 G.add_user(user2)
 G.add_user(user3)
+G.add_user(user4)
 G.add_friends(user1, user2, 5)
 G.add_friends(user2, user1, 5)
 G.add_friends(user2, user3, 4)
+G.add_friends(user3, user4, 5)
 
 
-G.dijkstra(user1)
+
+G.DFS(user1)
 
     
 
