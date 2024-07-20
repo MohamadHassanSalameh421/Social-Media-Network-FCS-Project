@@ -97,6 +97,9 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
     
     def add_posts(self, user: User):
         user.add_posts()
+    
+    def show_posts(self, user: User):
+        print(user.posts)
 
 
 

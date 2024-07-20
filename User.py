@@ -22,6 +22,7 @@ class User():
 
         while decision == 0:
             post = input("Add a new post (name): ")
+            self.posts.append(post)
             print("To Stop: Type 1, To Continue: Type 0")
             decision = int(input())
 
