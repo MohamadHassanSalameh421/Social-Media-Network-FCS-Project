@@ -1,4 +1,4 @@
-class DiGraph(): #A directed graph
+class DiGraph(): #A directed graph, In this weighted Graph 0 means no connections
 
     def __init__(self):
 
@@ -19,9 +19,18 @@ class DiGraph(): #A directed graph
 
 
     def add_friends(self, user1, user2, distance=0): #We add friends with distances to user2 (user1 -> user2)
-        if user1 and user2 in self.vertices:
+        if (user1 and user2) in self.vertices:
 
             self.graph[self.vertices[user2]][self.vertices[user1]] = distance
+
+
+
+    def remove_friends(self, user1, user2):
+        if (user1 and user2) in self.vertices:
+
+            self.graph[self.vertices[user2]][self.vertices[user1]] = 0 #0 means no relationship between these two users
+    
+    
 
 
 
@@ -29,6 +38,7 @@ class DiGraph(): #A directed graph
 
 
     
+
 
 
 
