@@ -21,7 +21,7 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
 
 
     def add_friends(self, user1: User, user2: User, distance=0): #We add friends with distances to user2 (user1 -> user2)
-        if (user1 and user2) in self.vertices:
+        if (user1.name and user2.name) in self.vertices:
 
             self.graph[self.vertices[user1.name]][self.vertices[user2.name]] = distance
 
@@ -110,6 +110,37 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
     def show_interests(self, user: User):
         print(user.interests)
 
+    
+    def dijkstra(self, start_user: User):
+        start_user_index = self.vertices[start_user.name]
+        distances = [float('inf')] * len(self.graph)
+        visited = [False] * len(self.graph)
+        distances[start_user_index] = 0
+
+        for _ in range(len(self.graph)):
+            min_distance = float('inf')
+            u = None
+            for i in range(len(self.graph)):
+                if not visited[i] and distances[i] < min_distance:
+                    min_distance = distances[i]
+                    u = i
+        
+            if u is None:
+                break
+            
+            visited[u] = True
+
+            for v in range(len(self.graph)):
+                if self.graph[u][v] > 0 and not visited[v]:
+                    alt = distances[u] + self.graph[u][v]
+                    if alt < distances[v]:
+                        distances[v] = alt
+        
+        for i, v in enumerate(distances):
+            print(f"Shortest path from {start_user.name} to {User.names[i + 1]} is {v}")
+
+
+
 
 G = DiGraph()
 user1 = User("Alice", 17, "NY")
@@ -118,13 +149,12 @@ user3 = User("Mohamad", 19, "Lebanon")
 G.add_user(user1)
 G.add_user(user2)
 G.add_user(user3)
-G.add_user("Mohamad")
-G.add_friends(user1, user2, 8)
-G.add_friends(user2, user1, 8)
-G.add_friends(user1, user3, 2)
+G.add_friends(user1, user2, 5)
+G.add_friends(user2, user1, 5)
+G.add_friends(user2, user3, 4)
 
 
-print(G.vertices)
+G.dijkstra(user1)
 
     
 
