@@ -1,4 +1,5 @@
 from collections import deque
+from User import *
 class DiGraph(): #A directed graph, In this weighted Graph 0 means no connections
 
     def __init__(self):
@@ -7,10 +8,10 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         self.vertices = {}
     
 
-    def add_user(self, user): #In here we add users to the social network
+    def add_user(self, user: User): #In here we add users to the social network
         if user not in self.vertices:
 
-            self.vertices[user] = len(self.graph)
+            self.vertices[user.name] = len(self.graph)
 
             for row in self.graph:
                 row.append(0)
@@ -19,34 +20,34 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
     
 
 
-    def add_friends(self, user1, user2, distance=0): #We add friends with distances to user2 (user1 -> user2)
+    def add_friends(self, user1: User, user2: User, distance=0): #We add friends with distances to user2 (user1 -> user2)
         if (user1 and user2) in self.vertices:
 
-            self.graph[self.vertices[user1]][self.vertices[user2]] = distance
+            self.graph[self.vertices[user1.name]][self.vertices[user2.name]] = distance
 
 
 
-    def remove_friends(self, user1, user2):
-        if (user1 and user2) in self.vertices:
+    def remove_friends(self, user1: User, user2: User):
+        if (user1.name and user2.name) in self.vertices:
 
-            self.graph[self.vertices[user2]][self.vertices[user1]] = 0 #0 means no relationship between these two users
+            self.graph[self.vertices[user2.name]][self.vertices[user1.name]] = 0 #0 means no relationship between these two users
     
     
 
-    def remove_user(self, user1):
+    def remove_user(self, user1: User):
 
-        if user1 in self.vertices:
+        if user1.name in self.vertices:
 
-            del self.graph[self.vertices[user1]]
+            del self.graph[self.vertices[user1.name]]
 
             for row in self.graph:
                 row.pop()
             
             for k, v in self.vertices.items():
-                if v > self.vertices[user1]:
+                if v > self.vertices[user1.name]:
                     self.vertices[k] = v - 1
                     
-            del self.vertices[user1]
+            del self.vertices[user1.name]
     
 
 
@@ -93,9 +94,30 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         
         print("Null")
 
+    
+    def add_posts(self, user: User):
+        user.add_posts()
 
 
 
+
+
+G = DiGraph()
+user1 = User("Alice", 17, "NY")
+user2 = User("Bob", 18, "Lebanon")
+user3 = User("Mohamad", 19, "Lebanon")
+G.add_user(user1)
+G.add_user(user2)
+G.add_user(user3)
+G.add_user("Mohamad")
+G.add_friends(user1, user2, 8)
+G.add_friends(user2, user1, 8)
+G.add_friends(user1, user3, 2)
+
+
+print(G.vertices)
+
+    
 
 
 
