@@ -1,11 +1,15 @@
 class User():
-
+    _id_ = 0
+    names = {}
     def __init__(self, name, age, location) -> None:
         self.name = name
         self.location = location
         self.age = age
         self.interests = []
         self.posts = []
+        User._id_ += 1
+        self.id = User._id_
+        User.names[self.id] = self.name
 
     
     def add_interests(self):
