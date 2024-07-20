@@ -1,3 +1,4 @@
+from collections import deque
 class DiGraph(): #A directed graph, In this weighted Graph 0 means no connections
 
     def __init__(self):
@@ -68,24 +69,33 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
 
         recursive_call(i, visited)
         print("Null")
-
-        
-
-
-
-
-
-G = DiGraph()
-G.add_user("Alice")
-G.add_user("Bob")
-G.add_user("Ali")
-G.add_friends("Alice", "Bob", 8)
-G.add_friends("Bob", "Alice", 8)
-G.add_friends("Bob", "Ali", 2)
-
-G.DFS("Ali")
-
     
+
+    def BFS(self, start):
+        j = self.vertices[start]
+        queue = deque()
+        queue.append(j)
+
+        visited = set()
+        visited.add(j)
+        while queue:
+
+            item = queue.popleft()
+            for k, v in self.vertices.items():
+                if v == item:
+                    print(k)
+                    print("|")
+
+            for i in range(len(self.graph[item])):
+                if self.graph[item][i] > 0 and i not in visited:
+                    queue.append(i)
+        
+        
+        print("Null")
+
+
+
+
 
 
 
