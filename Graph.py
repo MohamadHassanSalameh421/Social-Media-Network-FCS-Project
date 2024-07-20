@@ -21,7 +21,7 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
     def add_friends(self, user1, user2, distance=0): #We add friends with distances to user2 (user1 -> user2)
         if (user1 and user2) in self.vertices:
 
-            self.graph[self.vertices[user2]][self.vertices[user1]] = distance
+            self.graph[self.vertices[user1]][self.vertices[user2]] = distance
 
 
 
