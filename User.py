@@ -1,6 +1,5 @@
 class User():
-    _id_ = 0
-    names = {}
+    _id_ = 0 
     users_ages = []
     users_location = []
     def __init__(self, name, age, location) -> None:
@@ -11,7 +10,6 @@ class User():
         self.posts = []
         self.id = User._id_
         User._id_ += 1
-        User.names[self.id] = self.name
         User.users_ages.append(self.age)
         User.users_location.append(self.location)
 
