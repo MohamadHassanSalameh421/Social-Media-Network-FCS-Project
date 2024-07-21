@@ -193,3 +193,5 @@ class MyFrame(customtkinter.CTkScrollableFrame):
                 print("Found!")
             else:
                 print("Not Found!")
+    def sort(self):
+        self.G.sorting_users()
