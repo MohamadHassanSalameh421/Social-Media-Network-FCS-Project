@@ -3,6 +3,9 @@ from User import *
 import networkx as nx
 import matplotlib.pyplot as plt
 from collections import Counter
+import tkinter as tk
+import customtkinter
+import random
 class DiGraph(): #A directed graph, In this weighted Graph 0 means no connections
 
     def __init__(self):
@@ -10,59 +13,61 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         self.graph = []
         self.vertices = {}
         self.names = []
+        self.namesdict = {}
     
 
-    def add_user(self, user: User): #In here we add users to the social network
-        if user not in self.vertices:
+    def add_user(self, user_name): #In here we add users to the social network
+        if user_name not in self.vertices:
 
-            self.vertices[user.name] = len(self.graph)
+            self.vertices[user_name] = len(self.graph)
+            self.namesdict[len(self.graph)] = user_name
 
             for row in self.graph:
                 row.append(0)
 
             self.graph.append([0] * (len(self.graph) + 1))
 
-            self.names.append(user.name)
+            self.names.append(user_name)
     
 
 
-    def add_friends(self, user1: User, user2: User, distance=0): #We add friends with distances to user2 (user1 -> user2)
-        if (user1.name and user2.name) in self.vertices:
+    def add_friends(self, user1, user2, distance=0): #We add friends with distances to user2 (user1 -> user2)
+        if (user1 and user2) in self.vertices:
 
-            self.graph[self.vertices[user1.name]][self.vertices[user2.name]] = distance
+            self.graph[self.vertices[user1]][self.vertices[user2]] = distance
 
 
 
-    def remove_friends(self, user1: User, user2: User):
-        if (user1.name and user2.name) in self.vertices:
+    def remove_friends(self, user1, user2):
+        if (user1 and user2) in self.vertices:
 
-            self.graph[self.vertices[user2.name]][self.vertices[user1.name]] = 0 #0 means no relationship between these two users
+            self.graph[self.vertices[user2]][self.vertices[user1]] = 0 #0 means no relationship between these two users
     
     
 
-    def remove_user(self, user1: User):
+    def remove_user(self, user1):
 
-        if user1.name in self.vertices:
+        if user1 in self.vertices:
 
-            del self.graph[self.vertices[user1.name]]
+            del self.graph[self.vertices[user1]]
 
             for row in self.graph:
                 row.pop()
             
             for k, v in self.vertices.items():
-                if v > self.vertices[user1.name]:
+                if v > self.vertices[user1]:
                     self.vertices[k] = v - 1
                     
-            del self.vertices[user1.name]
+            del self.vertices[user1]
     
 
 
-    def DFS(self, start: User):
+    def DFS(self, start):
 
         visited = set()
-        i = self.vertices[start.name]
+        i = self.vertices[start]
 
-        print("Depth-first Search starting from " + start.name + ":")
+        print("Depth-first Search starting from " + start + ":")
 
         def recursive_call(i, visited):
             for k, v in self.vertices.items():
@@ -78,15 +83,16 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         recursive_call(i, visited)
     
 
-    def BFS(self, start: User):
-        j = self.vertices[start.name]
+    def BFS(self, start):
+        j = self.vertices[start]
         queue = deque()
         queue.append(j)
 
         visited = set()
         visited.add(j)
-        print("Breadth-first Search starting from " + start.name + ":")
+        print("Breadth-first Search starting from " + start + ":")
         while queue:
+            
 
             item = queue.popleft()
             for k, v in self.vertices.items():
@@ -100,24 +106,8 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         
 
     
-    def add_posts(self, user: User):
-        user.add_posts()
-    
-
-    def show_posts(self, user: User):
-        print(user.posts)
-
-
-    def add_interests(self, user: User):
-        user.add_interests()
-
-    
-    def show_interests(self, user: User):
-        print(user.interests)
-
-    
-    def dijkstra(self, start_user: User):
-        start_user_index = self.vertices[start_user.name]
+    def dijkstra(self, start_user):
+        start_user_index = self.vertices[start_user]
         distances = [float('inf')] * len(self.graph)
         visited = [False] * len(self.graph)
         distances[start_user_index] = 0
@@ -142,7 +132,7 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
                         distances[v] = alt
         
         for i, v in enumerate(distances):
-            print(f"Shortest path from {start_user.name} to {User.names[i + 1]} is {v}")
+            print(f"Shortest path from {start_user} to {self.namesdict[i]} is {v}")
 
     
 
@@ -152,7 +142,7 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         for i in range(len(self.graph)):
             for j in range(len(self.graph)):
                 if self.graph[i][j] > 0:
-                    H.add_edge(User.names[i], User.names[j], weight=self.graph[i][j])
+                    H.add_edge(self.namesdict[i], self.namesdict[j], weight=self.graph[i][j])
         edge_label = nx.get_edge_attributes(H, 'weight')
 
         pos = nx.circular_layout(H)
@@ -200,7 +190,7 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
                 if self.names[j] > self.names[j + 1]:
                     self.names[j], self.names[j + 1] = self.names[j + 1], self.names[j]
 
-        print(self.names)
+        
 
         
 
@@ -212,14 +202,14 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
             for j in range(len(self.graph)):
                 if self.graph[i][j] > 0:
                     counter += 1
-        return counter // len(self.graph) # dividing the counter with number of users
+        print(counter // len(self.graph)) # dividing the counter with number of users
 
 
     def average_age(self): #calculates the average age of all the users
         average = 0
         for i in User.users_ages:
             average += i
-        print(f'Average age is: {average}')
+        print(f'Average age is: {average // len(self.graph)}')
     
 
     def most_common_location(self): #gets the most common location of the users
@@ -232,8 +222,8 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
     
 
     
-    def connected_components(self, user: User): #We only need to use BFS or DFS because they will show us all the connected components
-        j = self.vertices[user.name]
+    def connected_components(self, user): #We only need to use BFS or DFS because they will show us all the connected components
+        j = self.vertices[user]
         queue = deque()
         queue.append(j)
 
@@ -254,24 +244,6 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
 
 
 
-G = DiGraph()
-user1 = User("Ali", 17, "NY")
-user2 = User("Bob", 18, "Lebanon")
-user3 = User("Mohamad", 19, "Lebanon")
-user4 = User("ali", 19, "Ny")
-
-G.add_user(user1)
-G.add_user(user2)
-G.add_user(user3)
-G.add_user(user4)
-G.add_friends(user1, user3, 5)
-G.add_friends(user1, user2, 5)
-G.add_friends(user2, user4, 4)
-
-
-
-
-G.sorting_users()
 
 
     
