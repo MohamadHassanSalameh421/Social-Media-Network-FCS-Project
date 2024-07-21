@@ -201,3 +201,6 @@ class MyFrame(customtkinter.CTkScrollableFrame):
     
     def average_age(self):
         self.G.average_age()
+    
+    def most_commonn_location(self):
+        self.G.most_common_location()
