@@ -176,3 +176,11 @@ class MyFrame(customtkinter.CTkScrollableFrame):
             customtkinter.CTkInputDialog(text="Please fill the field!")
         else:
             self.G.BFS(inputValue1)
+                
+    
+    def dijkstra(self):
+        inputValue1 = self.textbox8.get("1.0","end-1c")
+        if not inputValue1:
+            customtkinter.CTkInputDialog(text="Please fill the field!")
+        else:
+            self.G.dijkstra(inputValue1)
