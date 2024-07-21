@@ -230,7 +230,7 @@ class MyGui(customtkinter.CTk):
         self.grid_columnconfigure(0, weight = 1)
         
         
-        self.my_frame = MyFrame(master=self, width=450, height=500)
+        self.my_frame = MyFrame(master=self, width=390, height=500)
         self.my_frame.grid(row=0, column=0, padx=20, pady=20, sticky='sn')
         
 
