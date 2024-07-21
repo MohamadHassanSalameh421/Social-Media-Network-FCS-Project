@@ -121,3 +121,15 @@ class MyFrame(customtkinter.CTkScrollableFrame):
         self.textbox10.grid(row = 39, column=0)
         self.button14 = customtkinter.CTkButton(self, text="Click", command=self.connected_components)
         self.button14.grid(row= 40, column=0, padx=20, pady=20, sticky='ew', columnspan=2)
+
+    def retrieveInfo(self):
+        inputValue = self.textbox.get("1.0","end-1c")
+        inputValue1 = self.textbox1.get("1.0","end-1c")
+        inputValue2 = self.textbox2.get("1.0","end-1c")
+        
+    
+        if not inputValue or not inputValue1 or not inputValue2:
+            customtkinter.CTkInputDialog(text="Please fill each field!") #I did not find any function to prompt a warning :(
+        else:    
+            user1 = User(inputValue, int(inputValue1), inputValue2)
+            self.G.add_user(user1.name)
