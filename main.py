@@ -184,6 +184,8 @@ class MyFrame(customtkinter.CTkScrollableFrame):
             customtkinter.CTkInputDialog(text="Please fill the field!")
         else:
             self.G.dijkstra(inputValue1)
+    
+
     def searching(self):
         inputValue1 = self.textbox9.get("1.0","end-1c")
         if not inputValue1:
@@ -193,6 +195,8 @@ class MyFrame(customtkinter.CTkScrollableFrame):
                 print("Found!")
             else:
                 print("Not Found!")
+    
+
     def sort(self):
         self.G.sorting_users()
     
@@ -211,3 +215,31 @@ class MyFrame(customtkinter.CTkScrollableFrame):
             customtkinter.CTkInputDialog(text="Please fill the field!")
         else:
             self.G.connected_components(inputValue1)
+                
+
+
+class MyGui(customtkinter.CTk):
+
+    def __init__(self):
+        super().__init__()
+
+        self.title("Social Network")
+        self.geometry("800x500")
+    
+        customtkinter.set_default_color_theme("green")
+        self.grid_columnconfigure(0, weight = 1)
+        
+        
+        self.my_frame = MyFrame(master=self, width=450, height=500)
+        self.my_frame.grid(row=0, column=0, padx=20, pady=20, sticky='sn')
+        
+
+
+    
+
+
+
+
+
+app = MyGui()
+app.mainloop()
