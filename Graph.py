@@ -2,6 +2,7 @@ from collections import deque
 from User import *
 import networkx as nx
 import matplotlib.pyplot as plt
+from collections import Counter
 class DiGraph(): #A directed graph, In this weighted Graph 0 means no connections
 
     def __init__(self):
@@ -181,14 +182,14 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
             mid = left+ right // 2
 
             if self.names[mid] == user_name:
-                return True
+                return "Found"
 
             elif self.names[mid] < user_name:
                 left = mid + 1
             else:
                 right = mid - 1
 
-        return False
+        return "Not Found"
     
 
     def sorting_users(self):
