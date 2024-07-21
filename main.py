@@ -142,3 +142,7 @@ class MyFrame(customtkinter.CTkScrollableFrame):
         else:
             self.G.add_friends(inputValue1, inputValue2, random.randint(1, 11))
     
+    def display_graph(self):
+        self.G.displayGraph()
+
+    
