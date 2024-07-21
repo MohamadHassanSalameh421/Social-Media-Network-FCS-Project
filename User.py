@@ -7,8 +7,8 @@ class User():
         self.age = age
         self.interests = []
         self.posts = []
-        User._id_ += 1
         self.id = User._id_
+        User._id_ += 1
         User.names[self.id] = self.name
 
     

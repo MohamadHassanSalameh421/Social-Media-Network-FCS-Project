@@ -1,5 +1,7 @@
 from collections import deque
 from User import *
+import networkx as nx
+import matplotlib.pyplot as plt
 class DiGraph(): #A directed graph, In this weighted Graph 0 means no connections
 
     def __init__(self):
@@ -138,6 +140,38 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         for i, v in enumerate(distances):
             print(f"Shortest path from {start_user.name} to {User.names[i + 1]} is {v}")
 
+    
+
+    def displayGraph(self):
+        H = nx.DiGraph()
+
+        for i in range(len(self.graph)):
+            for j in range(len(self.graph)):
+                if self.graph[i][j] > 0:
+                    H.add_edge(User.names[i], User.names[j], weight=self.graph[i][j])
+        edge_label = nx.get_edge_attributes(H, 'weight')
+
+        pos = nx.circular_layout(H)
+        # nodes
+        nx.draw_networkx_nodes(H, pos, node_size=5000, node_color= '#FEE715')
+        # edges
+        nx.draw_networkx_edges(H, pos, width=10, edge_color="#101820",alpha = 0.7, style="dashed", arrowsize= 90)
+        # node labels
+        nx.draw_networkx_labels(H, pos, font_size=30, font_family="Cursive")
+        # edge weight labels
+        edge_labels = nx.get_edge_attributes(H, "weight")
+        nx.draw_networkx_edge_labels(H, pos, edge_labels)
+
+    
+        
+        plt.axis("off")
+        plt.tight_layout()        
+        plt.show()
+
+
+
+
+
 
 
 
@@ -150,14 +184,15 @@ G.add_user(user1)
 G.add_user(user2)
 G.add_user(user3)
 G.add_user(user4)
+G.add_friends(user1, user3, 5)
 G.add_friends(user1, user2, 5)
-G.add_friends(user2, user1, 5)
-G.add_friends(user2, user3, 4)
-G.add_friends(user3, user4, 5)
+G.add_friends(user2, user4, 4)
 
 
 
-G.DFS(user1)
+
+G.displayGraph()
+
 
     
 
