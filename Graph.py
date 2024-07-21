@@ -203,6 +203,15 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
 
         
 
+    def average_number_of_friends(self):
+        #to count the number of friends of all of the users
+        counter = 0
+
+        for i in range(len(self.graph)):
+            for j in range(len(self.graph)):
+                if self.graph[i][j] > 0:
+                    counter += 1
+        return counter // len(self.graph) # dividing the counter with number of users
 
 
 
