@@ -222,6 +222,15 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         print(f'Average age is: {average}')
     
 
+    def most_common_location(self): #gets the most common location of the users
+        locations = Counter(User.users_location)
+    
+
+        common_location = max(locations, key= lambda x: locations[x]) #gets the highest number of a specific location
+
+        print(common_location)
+    
+
     
 
 
