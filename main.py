@@ -146,3 +146,9 @@ class MyFrame(customtkinter.CTkScrollableFrame):
         self.G.displayGraph()
 
     
+    def remove_user(self):
+        inputValue1 = self.textbox5.get("1.0","end-1c")
+        if not inputValue1:
+            customtkinter.CTkInputDialog(text="Please fill the field!")
+        else:
+            self.G.remove_user(inputValue1)
