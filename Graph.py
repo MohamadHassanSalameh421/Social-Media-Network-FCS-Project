@@ -204,14 +204,16 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
             for j in range(len(self.graph)):
                 if self.graph[i][j] > 0:
                     counter += 1
-        print(counter // len(self.graph)) # dividing the counter with number of users
-
+        if counter > 0:
+            print(counter // len(self.graph)) # dividing the counter with number of users
+        
 
     def average_age(self): #calculates the average age of all the users
         average = 0
         for i in User.users_ages:
             average += i
-        print(f'Average age is: {average // len(self.graph)}')
+        if average > 0:
+            print(f'Average age is: {average // len(self.graph)}')
     
 
     def most_common_location(self): #gets the most common location of the users
