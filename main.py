@@ -204,3 +204,10 @@ class MyFrame(customtkinter.CTkScrollableFrame):
     
     def most_commonn_location(self):
         self.G.most_common_location()
+
+    def connected_components(self):
+        inputValue1 = self.textbox10.get("1.0","end-1c")
+        if not inputValue1:
+            customtkinter.CTkInputDialog(text="Please fill the field!")
+        else:
+            self.G.connected_components(inputValue1)
