@@ -189,6 +189,18 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
                 right = mid - 1
 
         return False
+    
+
+    def sorting_users(self):
+        n = len(self.names)
+
+        for i in range(n - 1):
+            for j in range(n - i - 1):
+                if self.names[j] > self.names[j + 1]:
+                    self.names[j], self.names[j + 1] = self.names[j + 1], self.names[j]
+
+        print(self.names)
+
         
 
 
@@ -199,7 +211,7 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
 
 
 G = DiGraph()
-user1 = User("Alice", 17, "NY")
+user1 = User("Ali", 17, "NY")
 user2 = User("Bob", 18, "Lebanon")
 user3 = User("Mohamad", 19, "Lebanon")
 user4 = User("ali", 19, "Ny")
@@ -215,7 +227,7 @@ G.add_friends(user2, user4, 4)
 
 
 
-G.displayGraph()
+G.sorting_users()
 
 
     
