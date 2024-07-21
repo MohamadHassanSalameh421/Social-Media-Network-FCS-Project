@@ -233,7 +233,22 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
 
     
     def connected_components(self, user: User): #We only need to use BFS or DFS because they will show us all the connected components
-        self.BFS(user)
+        j = self.vertices[user.name]
+        queue = deque()
+        queue.append(j)
+
+        visited = set()
+        visited.add(j)
+        while queue:
+
+            item = queue.popleft()
+            for k, v in self.vertices.items():
+                if v == item:
+                    print(k, end=' ')
+
+            for i in range(len(self.graph[item])):
+                if self.graph[item][i] > 0 and i not in visited:
+                    queue.append(i)
 
 
 
