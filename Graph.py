@@ -167,6 +167,26 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         plt.axis("off")
         plt.tight_layout()        
         plt.show()
+    
+
+
+    def searching_for_user(self, user_name):
+        left = 0
+        right = len(self.graph) - 1
+
+        while left <= right:
+            mid = left+ right // 2
+
+            if self.vertices[mid] == user_name:
+                return True
+
+            elif self.vertices[mid] < user_name:
+                left = mid + 1
+            else:
+                right = mid - 1
+                
+        return False
+        
 
 
 
@@ -180,6 +200,7 @@ user1 = User("Alice", 17, "NY")
 user2 = User("Bob", 18, "Lebanon")
 user3 = User("Mohamad", 19, "Lebanon")
 user4 = User("ali", 19, "Ny")
+
 G.add_user(user1)
 G.add_user(user2)
 G.add_user(user3)
