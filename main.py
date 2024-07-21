@@ -198,3 +198,6 @@ class MyFrame(customtkinter.CTkScrollableFrame):
     
     def average_number_off_friends(self):
         self.G.average_number_of_friends()
+    
+    def average_age(self):
+        self.G.average_age()
