@@ -184,3 +184,12 @@ class MyFrame(customtkinter.CTkScrollableFrame):
             customtkinter.CTkInputDialog(text="Please fill the field!")
         else:
             self.G.dijkstra(inputValue1)
+    def searching(self):
+        inputValue1 = self.textbox9.get("1.0","end-1c")
+        if not inputValue1:
+            customtkinter.CTkInputDialog(text="Please fill the field!")
+        else:
+            if self.G.searching_for_user(inputValue1) == True:
+                print("Found!")
+            else:
+                print("Not Found!")
