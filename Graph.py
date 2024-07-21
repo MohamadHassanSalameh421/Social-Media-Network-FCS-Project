@@ -140,9 +140,11 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         H = nx.DiGraph()
 
         for i in range(len(self.graph)):
+            H.add_node(self.namesdict[i])
             for j in range(len(self.graph)):
                 if self.graph[i][j] > 0:
                     H.add_edge(self.namesdict[i], self.namesdict[j], weight=self.graph[i][j])
+                
         edge_label = nx.get_edge_attributes(H, 'weight')
 
         pos = nx.circular_layout(H)
