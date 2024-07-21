@@ -133,3 +133,12 @@ class MyFrame(customtkinter.CTkScrollableFrame):
         else:    
             user1 = User(inputValue, int(inputValue1), inputValue2)
             self.G.add_user(user1.name)
+    
+    def add_friends(self):
+        inputValue1 = self.textbox3.get("1.0","end-1c")
+        inputValue2 = self.textbox4.get("1.0","end-1c")
+        if not inputValue1 or not inputValue2:
+            customtkinter.CTkInputDialog(text="Please fill each field!")
+        else:
+            self.G.add_friends(inputValue1, inputValue2, random.randint(1, 11))
+    
