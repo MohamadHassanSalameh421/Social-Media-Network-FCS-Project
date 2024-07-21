@@ -232,6 +232,8 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
     
 
     
+    def connected_components(self, user: User): #We only need to use BFS or DFS because they will show us all the connected components
+        self.BFS(user)
 
 
 
