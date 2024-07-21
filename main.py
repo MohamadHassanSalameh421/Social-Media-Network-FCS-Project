@@ -152,3 +152,12 @@ class MyFrame(customtkinter.CTkScrollableFrame):
             customtkinter.CTkInputDialog(text="Please fill the field!")
         else:
             self.G.remove_user(inputValue1)
+    
+    def remove_friends(self):
+        inputValue1 = self.textbox6.get("1.0","end-1c")
+        inputValue2 = self.textbox7.get("1.0","end-1c")
+
+        if not inputValue1 or not inputValue2:
+            customtkinter.CTkInputDialog(text="Please fill the field!")
+        else:
+            self.G.remove_friends(inputValue1, inputValue2)
