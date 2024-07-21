@@ -214,6 +214,14 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         return counter // len(self.graph) # dividing the counter with number of users
 
 
+    def average_age(self): #calculates the average age of all the users
+        average = 0
+        for i in User.users_ages:
+            average += i
+        print(f'Average age is: {average}')
+    
+
+    
 
 
 
