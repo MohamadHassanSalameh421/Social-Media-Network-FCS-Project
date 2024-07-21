@@ -8,6 +8,7 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
 
         self.graph = []
         self.vertices = {}
+        self.names = []
     
 
     def add_user(self, user: User): #In here we add users to the social network
@@ -19,6 +20,8 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
                 row.append(0)
 
             self.graph.append([0] * (len(self.graph) + 1))
+
+            self.names.append(user.name)
     
 
 
@@ -177,14 +180,14 @@ class DiGraph(): #A directed graph, In this weighted Graph 0 means no connection
         while left <= right:
             mid = left+ right // 2
 
-            if self.vertices[mid] == user_name:
+            if self.names[mid] == user_name:
                 return True
 
-            elif self.vertices[mid] < user_name:
+            elif self.names[mid] < user_name:
                 left = mid + 1
             else:
                 right = mid - 1
-                
+
         return False
         
 
