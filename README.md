@@ -1,4 +1,9 @@
 # Social Network Project
+## https://img.shields.io/badge/Python-grey?style=for-the-badge&logo=python 
+## ![GitHub followers](https://img.shields.io/github/followers/MohamadHassanSalameh421) ![GitHub forks](https://img.shields.io/github/forks/MohamadHassanSalameh421/Social-Media-Network-FCS-Project)
+
+
+
 ## Description
 ### Hello, I would like to introduce you to my first project. This is about a social network where you can add users and remove users, add followers, and use many amazing algorithms like Dijkstra and DFS and BFS, etc.. It has a friendly interface so it should be hard to understand how the things work. :grin: Unfortunately DFS and BFS and connected components buttons do not work properly, what you should do is to click twice on the button that you want but about connected components button you should click on it once and then click on any other button that prints something on CMD, that is messy but I will try to fix it soon.:confused:
 ### You are expected to see a graph visualization and outputs on your terminal.
