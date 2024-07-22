@@ -1,5 +1,6 @@
 # Social Network Project
-## https://img.shields.io/badge/Python-grey?style=for-the-badge&logo=python 
+## ![Static Badge](https://img.shields.io/badge/Python-grey?style=for-the-badge&logo=python)
+
 ## ![GitHub followers](https://img.shields.io/github/followers/MohamadHassanSalameh421) ![GitHub forks](https://img.shields.io/github/forks/MohamadHassanSalameh421/Social-Media-Network-FCS-Project)
 
 
